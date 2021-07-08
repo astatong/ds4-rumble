@@ -1,6 +1,9 @@
 button_dpad_up :
+  #震动时长
   duration : 0.5
+  #手柄握持部分震动强度
   rumble_big : 0.2
+  #手柄触控板下方震动强度
   rumble_small : 0.3
 button_dpad_down :
   duration : 0.7

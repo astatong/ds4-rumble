@@ -6,6 +6,7 @@
 
   <node pkg="ds4_driver" type="ds4_driver_node.py" name="ds4_driver" output="screen" >
     <rosparam command="load" file="$(find ds4_driver)/config/params.yaml" />
+    <!--加载按键震动反馈参数-->
     <rosparam command="load" file="$(find ds4_driver)/config/rumble_params.yaml" />
 
     <param name="device_addr" value="$(arg addr)" />
