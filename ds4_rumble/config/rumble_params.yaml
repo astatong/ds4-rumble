@@ -1,0 +1,72 @@
+button_dpad_up :
+  duration : 0.5
+  rumble_big : 0.2
+  rumble_small : 0.3
+button_dpad_down :
+  duration : 0.7
+  rumble_big : 0.0
+  rumble_small : 0.3
+button_dpad_left :
+  duration : 0.2
+  rumble_big : 0.0
+  rumble_small : 0.5
+button_dpad_right :
+  duration : 0.2
+  rumble_big : 0.5
+  rumble_small : 0.0
+button_cross :
+  duration : 0.2
+  rumble_big : 1.0
+  rumble_small : 0.0
+button_circle :
+  duration : 0.8
+  rumble_big : 0.7
+  rumble_small : 0.0
+button_square :
+  duration : 0.9
+  rumble_big : 0.0
+  rumble_small : 0.9
+button_triangle :
+  duration : 1.5
+  rumble_big : 0.0
+  rumble_small : 0.9
+button_l1 :
+  duration : 2.0
+  rumble_big : 0.6
+  rumble_small : 0.0
+button_l2 :
+  duration : 1.0
+  rumble_big : 0.3
+  rumble_small : 0.0
+button_l3 :
+  duration : 0.8
+  rumble_big : 0.0
+  rumble_small : 0.1
+button_r1 :
+  duration : 0.6
+  rumble_big : 0.3
+  rumble_small : 0.1
+button_r2 :
+  duration : 0.3
+  rumble_big : 1.0
+  rumble_small : 0.6
+button_r3 :
+  duration : 0.8
+  rumble_big : 1.0
+  rumble_small : 0.0
+button_share :
+  duration : 0.7
+  rumble_big : 0.0
+  rumble_small : 0.5
+button_options :
+  duration : 1.5
+  rumble_big : 0.9
+  rumble_small : 0.0
+button_trackpad :
+  duration : 0.9
+  rumble_big : 0.0
+  rumble_small : 1.0
+button_ps :
+  duration : 1.0
+  rumble_big : 1.0
+  rumble_small : 1.0
