@@ -92,7 +92,6 @@ class Controller(Thread):
                       big_rumble=rumble_big if rumble_big is not None else 0)
 
     def _control(self, **kwargs):
-        #此处control为ds4drv驱动中实现的函数，主要用途为控制灯光与震动反馈
         self.device.control(led_red=self._led[0],
                             led_green=self._led[1],
                             led_blue=self._led[2],

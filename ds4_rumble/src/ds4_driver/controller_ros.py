@@ -19,9 +19,7 @@ class ControllerRos(Controller):
 
     def __init__(self):
         super(ControllerRos, self).__init__()
-        #获取是否使用ros标准消息类型的参数
         self.use_standard_msgs = rospy.get_param('~use_standard_msgs', False)
-        #获取摇杆死区大小的参数
         self.deadzone = rospy.get_param('~deadzone', 0.1)
         self.frame_id = rospy.get_param('~frame_id', 'ds4')
         self.imu_frame_id = rospy.get_param('~imu_frame_id', 'ds4_imu')
@@ -41,13 +39,10 @@ class ControllerRos(Controller):
                 period = 1.0 / self._autorepeat_rate
                 rospy.Timer(rospy.Duration.from_sec(period), self.cb_joy_pub_timer)
         else:
-            #声明发布按键状态的话题
             self.pub_status = rospy.Publisher('status', Status, queue_size=1)
-            #订阅反馈控制的话题
             self.sub_feedback = rospy.Subscriber('set_feedback', Feedback, self.cb_feedback, queue_size=1)
 
 
-        #获取震动配置参数
         self.rumble_button_dpad_up_t     = rospy.get_param('~button_dpad_up/duration', 0.0)
         self.rumble_button_dpad_up_b     = rospy.get_param('~button_dpad_up/rumble_big', 0.0)
         self.rumble_button_dpad_up_s     = rospy.get_param('~button_dpad_up/rumble_small', 0.0)
@@ -120,18 +115,13 @@ class ControllerRos(Controller):
         self.rumble_button_ps_b          = rospy.get_param('~button_ps/rumble_big', 0.0)
         self.rumble_button_ps_s          = rospy.get_param('~button_ps/rumble_small', 0.0)
 
-    #震动控制函数 传入参数为当前的按键状态
     def rumble_ctr(self, status):
-        #定义震动控制消息对象
         fb = Feedback()
         fb.set_rumble = True
-        #每次按下只震动一次
         if self._once_judge(status.button_dpad_up,self.last_status.button_dpad_up) :
-            #将对应按键震动反馈参数对应赋值 rumble_big对应手柄握持部分的振动器，rumble_small对应触摸板下方振动器，rumble_duration对应震动时长
             fb.rumble_big = self.rumble_button_dpad_up_b
             fb.rumble_small = self.rumble_button_dpad_up_s
             fb.rumble_duration = self.rumble_button_dpad_up_t
-            #cb_feedback函数是实现按照参数调用震动控制的函数
             self.cb_feedback(fb)
         if self._once_judge(status.button_dpad_down,self.last_status.button_dpad_down) :
             fb.rumble_big = self.rumble_button_dpad_down_b
@@ -221,7 +211,6 @@ class ControllerRos(Controller):
 
         ControllerRos.last_status = status
 
-    # 此函数为获取按键状态以及imu数据
     def cb_report(self, report):
         """
         Callback method for ds4drv event loop
@@ -278,7 +267,6 @@ class ControllerRos(Controller):
             return
 
         def to_int(v): return int(v * 255)
-        #control函数为执行灯光与震动控制的函数
         self.control(
             # LED color
             led_red=to_int(msg.led_r) if msg.set_led else None,
@@ -293,7 +281,6 @@ class ControllerRos(Controller):
         )
 
         # Timer to stop rumble
-        # 按照定义的震动时长来下发停止震动的命令
         if msg.set_rumble and msg.rumble_duration != 0:
             rospy.Timer(rospy.Duration(msg.rumble_duration),
                         self.cb_stop_rumble,
@@ -409,7 +396,6 @@ class ControllerRos(Controller):
 
         return status_msg
 
-    #判断是否重新按下
     @staticmethod
     def _once_judge(a,b):
         if a:
